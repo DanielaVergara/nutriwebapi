@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+    Route::post('/createPerson', 'PersonController@createPerson');
+    Route::put('/updatePerson/{id}', 'PersonController@updatePerson');
+    Route::get('/searchPerson/{id}', 'PersonController@searchPerson');
+    Route::delete('/deletePerson/{id}', 'PersonController@deletePerson');
+
