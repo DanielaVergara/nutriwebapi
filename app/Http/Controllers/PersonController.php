@@ -7,8 +7,12 @@ use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
+
+
+  
+    
     public function createPerson(Request $request)
-    {
+    {   
         $json = $request->json()->all();
         $person =  new Person;
         $person->id   =  $json['id'];
@@ -19,8 +23,13 @@ class PersonController extends Controller
         $person->height    = $json['height'];
         $person->email     = $json['email'];
         $person->save();
+    
+        $planController = new PlanController;
+        $planController->calculateIdealWeight($person);
         return response()->json($person);
     }
+
+
 
     public function updatePerson(Request $request, $id)
     {

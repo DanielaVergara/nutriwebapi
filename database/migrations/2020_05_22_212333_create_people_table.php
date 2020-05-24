@@ -22,7 +22,7 @@ class CreatePeopleTable extends Migration
             $table->integer('age')->nullable();;
             $table->string('email',30);
             $table->integer('weight');
-            $table->integer('height');
+            $table->float('height');
             $table->timestamps();
         });
     }

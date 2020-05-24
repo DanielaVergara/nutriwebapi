@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlansTable extends Migration
+class CreateTypeIngredientsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,8 @@ class CreatePlansTable extends Migration
      */
     public function up()
     {
-        Schema::create('plans', function (Blueprint $table) {
+        Schema::create('type_ingredients', function (Blueprint $table) {
             $table->id();
-            $table->string('names',30);
-            $table->bigInteger('calories');
-            $table->string('description',100);
-            $table->string('endDate',30);
-            $table->string('startDate',30);
-            $table->string('goalWeight',30);
             $table->timestamps();
         });
     }
@@ -32,6 +26,6 @@ class CreatePlansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('plans');
+        Schema::dropIfExists('type_ingredients');
     }
 }
