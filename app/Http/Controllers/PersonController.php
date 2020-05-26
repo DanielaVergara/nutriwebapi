@@ -11,7 +11,6 @@ class PersonController extends Controller
     {
         $json = $request->json()->all();
         $person =  new Person;
-        $person->id   =  $json['id'];
         $person->names = $json['names'];
         $person->lastnames = $json['lastnames'];
         $person->birthdate = $json['birthdate'];
@@ -19,7 +18,10 @@ class PersonController extends Controller
         $person->height    = $json['height'];
         $person->email     = $json['email'];
         $person->save();
-        return response()->json($person);
+        return response()->json([
+            'code'=>'0',
+            'msg'=>'Sucessful'
+        ]);
     }
 
     public function updatePerson(Request $request, $id)
