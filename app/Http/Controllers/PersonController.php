@@ -22,9 +22,9 @@ class PersonController extends Controller
         $person->height    = $json['height'];
         $person->email     = $json['email'];
         $person->save();
-        return response()->json([
         $planController = new PlanController;
         $planController->calculateIdealWeight($person);
+        return response()->json([
             'code'=>'0',
             'msg'=>'Sucessful'
         ]);
