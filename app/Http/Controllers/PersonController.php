@@ -52,4 +52,9 @@ class PersonController extends Controller
         $person = Person:: findOrFail($id);
         return response()->json($person);
     }
+
+    public function searchPersonByUserId($id){
+        $persons = Person::where('id_user','=',$id)->first();
+        return response()->json($persons);
+    }
 }

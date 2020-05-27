@@ -18,7 +18,9 @@ Route::get('/', function () {
 });
 
     Route::post('/createPerson', 'PersonController@createPerson');
+    Route::post('/login', 'UserController@login');
     Route::put('/updatePerson/{id}', 'PersonController@updatePerson');
     Route::get('/searchPerson/{id}', 'PersonController@searchPerson');
+    Route::get('/searchPersonByUserId/{id}', 'PersonController@searchPersonByUserId');
     Route::delete('/deletePerson/{id}', 'PersonController@deletePerson');
 
