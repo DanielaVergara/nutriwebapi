@@ -3,14 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Person;
+use App\User;
 use Illuminate\Http\Request;
 
 class PersonController extends Controller
-{
-
-
-  
-    
+{   
     public function createPerson(Request $request)
     {   
         $json = $request->json()->all();
@@ -21,6 +18,11 @@ class PersonController extends Controller
         $person->weight    = $json['weight'];
         $person->height    = $json['height'];
         $person->email     = $json['email'];
+        $user = new User;
+        $user->email = $json['email'];
+        $user->password = $json['password'];
+        $user->save();
+        $person->id_user = $user->id;
         $person->save();
         $planController = new PlanController;
         $planController->calculateIdealWeight($person);

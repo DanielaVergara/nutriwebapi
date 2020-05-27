@@ -29,6 +29,7 @@ class PlanController extends Controller
             $personPlan->goalCalories = $person->weight * 35;
         }
         $personPlan->email =  $person->email;
+        $personPlan->id_person = $person->id;
         $personPlan->save();
     }
 }

@@ -18,6 +18,10 @@ class CreatePersonPlansTable extends Migration
             $table->string('email',30);
             $table->string('goalDescription',100);
             $table->integer('goalCalories');
+            $table->unsignedBigInteger('id_person')->nullable();
+            $table->unsignedBigInteger('id_plan')->nullable();
+            $table->foreign('id_person')->references('id')->on('people');
+            $table->foreign('id_plan')->references('id')->on('plans');
             $table->timestamps();
         });
     }
