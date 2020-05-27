@@ -22,7 +22,7 @@ class CreatePeopleTable extends Migration
             $table->string('email',30);
             $table->integer('weight');
             $table->float('height');
-            $table->unsignedBigInteger('id_user')->nullable();
+            $table->unsignedBigInteger('id_user');
             $table->foreign('id_user')->references('id')->on('users');
             $table->timestamps();
         });
