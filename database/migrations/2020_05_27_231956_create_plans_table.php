@@ -22,7 +22,7 @@ class CreatePlansTable extends Migration
             $table->string('startDate',30);
             $table->string('goalWeight',30);
             $table->unsignedBigInteger('id_person');
-            $table->foreign('id_person')->references('id')->on('people');
+            //$table->foreign('id_person')->references('id')->on('people');
             $table->timestamps();
         });
     }

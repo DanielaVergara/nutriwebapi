@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Person;
 use App\PersonPlan;
-use App\Plan;
 use App\Http\Controllers\TypeIngredientsController;
 use Illuminate\Support\Facades\DB;
-
 
 class PlanController extends Controller
 {
@@ -17,8 +15,8 @@ class PlanController extends Controller
         $heightSquare = $person->height * $person->height;
         $imc =   $person->weight  /  $heightSquare;
         $float_redondeado = round($imc);
-        $planController = new PlanController();
         $personPlan = new PersonPlan();
+        $planController = new PlanController();
 
         if ($float_redondeado >= 25) {
             $personPlan->goalDescription = "La meta planteada para este mes, es bajar de peso";
@@ -34,9 +32,10 @@ class PlanController extends Controller
         }
         $personPlan->email =  $person->email;
         $personPlan->id_person = $person->id;
-        $planController->validatePlan($personPlan->goalCalories);
+        $personPlan->id_plan   = 1;
         $personPlan->save();
     }
+
 
     public function getPlan($idPerson){
         $plan=DB::table('plans')
@@ -47,13 +46,11 @@ class PlanController extends Controller
         ->select('ingredients.names', 'plan_ingredients.hour')
         ->where('person_plans.id_person','=',$idPerson)->get();
         return response()->json($plan);
-                    
     }
 
     public function ingredients(){
         $typeIngredientController = new TypeIngredientsController();
         $ingredientsController = new IngredientsController();
-        
         $ingredientsController->validationIngredientsType($typeIngredientController->getTypeIngredients());
     }
 }
