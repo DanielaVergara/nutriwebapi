@@ -24,6 +24,6 @@ Route::get('/', function () {
     Route::get('/searchPersonByUserId/{id}', 'PersonController@searchPersonByUserId');
     Route::delete('/deletePerson/{id}', 'PersonController@deletePerson');
 
-
+    Route::get('/plan/{id}','PlanController@getPlan');
     Route::get('/ingredients','PlanController@ingredients');
 

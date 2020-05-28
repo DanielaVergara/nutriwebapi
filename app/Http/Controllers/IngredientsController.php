@@ -20,7 +20,6 @@ class IngredientsController extends Controller
     private function validationFood($typeIngredient,$hour){
         $ingredientsController = new IngredientsController();
         switch ($typeIngredient->name) {
-            //DESAYUNO
             case "fruta/verdura":
                 $planIngredients = new PlanIngredient();
                 $ingredient =  $ingredientsController->getIngredientsByType($typeIngredient->id);   
