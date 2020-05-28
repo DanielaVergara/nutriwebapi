@@ -43,7 +43,7 @@ class PlanController extends Controller
         ->join('plan_ingredients','plans.id','=','plan_ingredients.id_plan')
         ->join('ingredients','plan_ingredients.id_ingredient','=','ingredients.id')
         ->join('type_ingredients','ingredients.id_type','=','type_ingredients.id')
-        ->select('ingredients.names', 'plan_ingredients.hour')
+        ->select('ingredients.names', 'plan_ingredients.hour','person_plans.goalCalories','person_plans.goalDescription')
         ->where('person_plans.id_person','=',$idPerson)->get();
         return response()->json($plan);
     }
