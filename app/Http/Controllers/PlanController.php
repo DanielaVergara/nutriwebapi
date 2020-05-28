@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Person;
 use App\PersonPlan;
-use Illuminate\Http\Request;
+use App\Http\Controllers\TypeIngredientsController;
 
 class PlanController extends Controller
 {
@@ -31,6 +31,12 @@ class PlanController extends Controller
         $personPlan->email =  $person->email;
         $personPlan->id_person = $person->id;
         $personPlan->save();
+    }
+
+    public function ingredients(){
+        $typeIngredientController = new TypeIngredientsController();
+        $ingredientsController = new IngredientsController();
         
+        $ingredientsController->validationIngredientsType($typeIngredientController->getTypeIngredients());
     }
 }

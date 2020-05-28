@@ -19,7 +19,7 @@ class CreatePlanIngredientsTable extends Migration
             $table->unsignedBigInteger('id_ingredient');
             $table->foreign('id_plan')->references('id')->on('plans');
             $table->foreign('id_ingredient')->references('id')->on('ingredients');
-            $table->string('hour',200);
+            $table->string('hour',200)->nullable();
             $table->timestamps();
         });
     }
