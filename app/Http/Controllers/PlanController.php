@@ -31,5 +31,6 @@ class PlanController extends Controller
         $personPlan->email =  $person->email;
         $personPlan->id_person = $person->id;
         $personPlan->save();
+        
     }
 }
