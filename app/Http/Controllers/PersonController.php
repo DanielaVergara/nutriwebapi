@@ -25,9 +25,10 @@ class PersonController extends Controller
         $person->id_user = $user->id;
         $person->save();
         $planController = new PlanController;
-        $planController->calculateIdealWeight($person);
-        $planController->ingredients();
-        $plan    = $planController->getPlan($person->id_user);
+        $ingredientsController = new IngredientsController;
+        $plan    = $planController->getPlan($person->id);
+        $personPlan =  $planController->calculateIdealWeight($person);
+        $ingredientsController->ingredients($personPlan);
         dd(response()->json($plan));
         return response()->json($plan);
     }

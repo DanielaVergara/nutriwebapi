@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Person;
 use App\PersonPlan;
-use App\Http\Controllers\TypeIngredientsController;
+use App\Plan;
 use Illuminate\Support\Facades\DB;
 
 class PlanController extends Controller
@@ -30,12 +30,20 @@ class PlanController extends Controller
             $personPlan->goalDescription = "La meta planteada para este mes, es subir de peso";
             $personPlan->goalCalories = $person->weight * 35;
         }
-        $personPlan->email =  $person->email;
-        $personPlan->id_person = $person->id;
-        $personPlan->id_plan   = 1;
-        $personPlan->save();
+         $planController->associatePlan($personPlan,$person);
+      return $personPlan;
     }
 
+    public function associatePlan($personPlan,$person){
+        $plan  = Plan::where('calories','<=',$personPlan->goalCalories)->get();
+        for ($i=0; $i < $plan->count(); $i++) { 
+            $personPlan->email =  $person->email;
+            $personPlan->id_person = $person->id;
+            $personPlan->id_plan = $plan[$i]->id;
+            $personPlan->save();
+        }
+
+    }
 
     public function getPlan($idPerson){
         $plan=DB::table('plans')
@@ -43,14 +51,11 @@ class PlanController extends Controller
         ->join('plan_ingredients','plans.id','=','plan_ingredients.id_plan')
         ->join('ingredients','plan_ingredients.id_ingredient','=','ingredients.id')
         ->join('type_ingredients','ingredients.id_type','=','type_ingredients.id')
-        ->select('ingredients.names', 'plan_ingredients.hour','person_plans.goalCalories','person_plans.goalDescription')
+        ->select('ingredients.names', 'plan_ingredients.hour',
+                'person_plans.goalCalories','person_plans.goalDescription',
+                'plans.endDate','plans.startDate')
         ->where('person_plans.id_person','=',$idPerson)->get();
         return response()->json($plan);
     }
 
-    public function ingredients(){
-        $typeIngredientController = new TypeIngredientsController();
-        $ingredientsController = new IngredientsController();
-        $ingredientsController->validationIngredientsType($typeIngredientController->getTypeIngredients());
-    }
 }
